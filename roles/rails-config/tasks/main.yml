@@ -1,0 +1,79 @@
+- name: Create deployment user
+  user: name={{ deploy_user }} comment="Application deployment user"
+  become: true
+
+# - name: Create deployment directory
+#   file: >
+#     path={{deploy_directory}} 
+#     owner={{ deploy_user }}
+#     group={{ deploy_user }}
+#     state=directory
+#   become: true
+
+- name: Update user permissions
+  template:
+    src: templates/deployer.j2
+    dest: /etc/sudoers.d/deployer
+    owner: root
+    group: root
+    mode: 0440
+  become: true
+
+- name: Create .ssh folder
+  file:
+    path: '/home/{{ deploy_user }}/.ssh'
+    state: directory
+    group: '{{ deploy_user }}'
+    owner: '{{ deploy_user }}'
+  become: true
+
+- name: "Update {{ deploy_user }}'s allowed keys"
+  copy:
+    remote_src: true
+    src: /home/{{ remote_user }}/.ssh/authorized_keys
+    dest: /home/{{ deploy_user }}/.ssh/authorized_keys
+    group: '{{ deploy_user }}'
+    owner: '{{ deploy_user }}'
+  become: true
+
+- name: Install application specific dependencies
+  apt: >
+    package={{ item }}
+    state=installed
+    force=yes
+    update_cache=yes
+    cache_valid_time=3600
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  with_items:
+    - libmysqlclient-dev
+    - imagemagick
+  become: true
+
+- name: Add nodejs ppa Debian
+  shell: 'curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -'
+  become: true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Add nodejs ppa RHEL
+  shell: 'curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -'
+  become: true
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install nodejs APT
+  apt:
+    package: nodejs 
+    state: installed 
+    force: yes 
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Install nodejs YUM
+  yum:
+    name: nodejs
+    state: installed
+    update_cache: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+  become: true
+
