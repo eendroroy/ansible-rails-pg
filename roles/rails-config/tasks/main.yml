@@ -36,44 +36,13 @@
     owner: '{{ deploy_user }}'
   become: true
 
-- name: Install application specific dependencies
-  apt: >
-    package={{ item }}
-    state=installed
-    force=yes
-    update_cache=yes
-    cache_valid_time=3600
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  with_items:
-    - libmysqlclient-dev
-    - imagemagick
-  become: true
-
-- name: Add nodejs ppa Debian
-  shell: 'curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -'
-  become: true
+- include-tasks: distros/apt.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Add nodejs ppa RHEL
-  shell: 'curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -'
-  become: true
+
+- include-tasks: distros/yum.yml
   when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Install nodejs APT
-  apt:
-    package: nodejs 
-    state: installed 
-    force: yes 
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  become: true
 
-- name: Install nodejs YUM
-  yum:
-    name: nodejs
-    state: installed
-    update_cache: yes
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
-  become: true
+
 

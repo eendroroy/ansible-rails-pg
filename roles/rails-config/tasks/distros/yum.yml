@@ -1,0 +1,17 @@
+---
+- name: Add nodejs ppa RHEL
+  get_url: 
+    url: https://rpm.nodesource.com/setup_8.x
+    dest: /tmp/nodejs.sh
+
+- name: Execute nodejs ppa
+  script: /tmp/nodejs.sh
+  become: true
+
+
+- name: Install nodejs YUM
+  yum:
+    name: nodejs
+    state: installed
+    update_cache: yes
+  become: true
