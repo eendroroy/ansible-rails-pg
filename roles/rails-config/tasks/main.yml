@@ -39,10 +39,5 @@
 - include-tasks: distros/apt.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-
 - include-tasks: distros/yum.yml
   when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
-
-
-
-
