@@ -15,9 +15,10 @@ Vagrant.configure("2") do |config|
     vb.memory = 2048
   end
 
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo /etc/init.d/network restart
-  # SHELL
+  config.vm.provision "bootstrap", type: "shell" do |s|
+    s.inline = "echo 'bootstrap provisioner'"
+    s.inline = "sudo /etc/init.d/network restart"
+  end
 
   config.vm.provision "ansible" do |ansible|
     ansible.limit = "all"
