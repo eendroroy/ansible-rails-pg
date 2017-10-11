@@ -1,0 +1,10 @@
+- debug:
+    var: "{{ item }}"
+  with_items:
+    - remote_user
+    - deploy_user
+    - ruby_version
+    - node_version
+    - app_name
+    - app_env
+
