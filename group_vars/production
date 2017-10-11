@@ -1,0 +1,4 @@
+app_env: production
+
+postgres_user: myRobiProductionUser
+postgres_user_password: production_pass

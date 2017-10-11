@@ -1,0 +1,4 @@
+app_env: staging
+
+postgres_user: myRobiStagingUser
+postgres_user_password: staging_pass

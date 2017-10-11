@@ -1,0 +1,6 @@
+remote_user: vagrant
+
+ruby_version: 2.4.1
+
+deploy_user: deployer
+app_name: my_robi
