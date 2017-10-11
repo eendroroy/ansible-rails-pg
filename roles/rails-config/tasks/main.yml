@@ -1,14 +1,8 @@
 - name: Create deployment user
-  user: name={{ deploy_user }} comment="Application deployment user"
+  user:
+    name: '{{ deploy_user }}'
+    comment: "Application deployment user"
   become: true
-
-# - name: Create deployment directory
-#   file: >
-#     path={{deploy_directory}} 
-#     owner={{ deploy_user }}
-#     group={{ deploy_user }}
-#     state=directory
-#   become: true
 
 - name: Update user permissions
   template:
@@ -36,8 +30,10 @@
     owner: '{{ deploy_user }}'
   become: true
 
-- include-tasks: distros/apt.yml
+- name: Rails configuration for debian distros
+  import_tasks: distros/apt.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- include-tasks: distros/yum.yml
+- name: Rails configuration for RHEL distros
+  import_tasks: distros/yum.yml
   when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'

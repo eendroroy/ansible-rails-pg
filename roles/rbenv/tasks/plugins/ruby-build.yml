@@ -9,5 +9,4 @@
   git:
     repo: '{{ ruby_build_url }}'
     dest: '{{ ruby_build_path }}'
-
   when: ruby_build_dir.stat.exists == false

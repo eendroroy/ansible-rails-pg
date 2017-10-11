@@ -11,8 +11,10 @@
 - debug:
     var: release.stdout
 
-- include_tasks: distros/apt.yml
+- name: Initial setup for Debian
+  import_tasks: distros/apt.yml
   when: release.stdout == 'xenial'
 
-- include_tasks: distros/yum.yml
+- name: Initial setup for RHEL
+  import_tasks: distros/yum.yml
   when: release.stdout == 'centos' or release.stdout == 'rhel'

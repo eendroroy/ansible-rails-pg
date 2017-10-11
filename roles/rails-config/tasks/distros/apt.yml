@@ -1,11 +1,11 @@
 ---
 - name: Install application specific dependencies
-  apt: >
-    package={{ item }}
-    state=installed
-    force=yes
-    update_cache=yes
-    cache_valid_time=3600
+  apt:
+    name: '{{ item }}'
+    state: installed
+    force: yes
+    update_cache: yes
+    cache_valid_time: 3600
   with_items:
     - libmysqlclient-dev
     - imagemagick
@@ -21,7 +21,7 @@
 
 - name: Install nodejs APT
   apt:
-    package: nodejs 
+    name: nodejs 
     state: installed 
     force: yes 
     update_cache: yes
