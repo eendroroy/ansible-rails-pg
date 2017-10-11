@@ -1,0 +1,13 @@
+---
+- name: Check for previous installation of ruby-build
+  stat:
+    path: '{{ ruby_build_path }}'
+  ignore_errors: true
+  register: ruby_build_dir
+
+- name: Clone ruby-build
+  git:
+    repo: '{{ ruby_build_url }}'
+    dest: '{{ ruby_build_path }}'
+
+  when: ruby_build_dir.stat.exists == false

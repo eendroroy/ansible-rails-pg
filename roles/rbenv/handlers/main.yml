@@ -1,0 +1,3 @@
+---
+- name: rehash
+  raw: 'RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv rehash'

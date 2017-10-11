@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# rbenv setup
+export RBENV_ROOT={{ rbenv_path }}
+export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+eval "$(rbenv init -)"

@@ -1,0 +1,34 @@
+---
+- name: Check for previous installation of rbenv
+  stat:
+    path: '{{ rbenv_path }}/bin/rbenv'
+  ignore_errors: true
+  register: rbenv_bin_dir
+
+- block:
+  - name: Create base directory
+    file:
+      path: '{{ rbenv_path }}'
+      state: directory
+      group: '{{ remote_user }}'
+      owner: '{{ remote_user }}'
+    become: true
+
+  - name: Clone rbenv
+    git:
+      repo: '{{ rbenv_url }}'
+      dest: '{{ rbenv_path }}'
+      accept_hostkey: yes
+
+  - name: Compile dynamic bash extension to speed up rbenv
+    raw: '{{ rbenv_path }}/src/configure && make -C {{ rbenv_path }}/src'
+
+  - name: Add rbenv to PATH
+    template:
+      src: rbenv.sh.j2
+      dest: /etc/profile.d/rbenv.sh
+      owner: root
+      group: root
+      mode: 0775
+    become: true
+  when: rbenv_bin_dir.stat.exists == false

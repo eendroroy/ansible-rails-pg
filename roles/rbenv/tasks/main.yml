@@ -1,0 +1,18 @@
+---
+- import_tasks: dependencies/apt.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- import_tasks: dependencies/yum.yml
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- import_tasks: install-rbenv.yml
+
+- import_tasks: plugins/ruby-build.yml
+
+- import_tasks: plugins/rbenv-default-gems.yml
+
+- import_tasks: install-ruby.yml
+
+- name: Make sure bundler is installed
+  raw: 'RBENV_ROOT={{ rbenv_path }} RBENV_VERSION={{ ruby_version }} {{ rbenv_path }}/bin/rbenv exec gem install bundler'
+  become: true

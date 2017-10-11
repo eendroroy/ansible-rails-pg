@@ -1,0 +1,21 @@
+---
+- name: Check for previous installation of rbenv-default-gems
+  stat:
+    path: '{{ rbenv_default_gems_path }}'
+  ignore_errors: true
+  register: rbenv_default_gems_dir
+
+- block:
+  - name: Clone rbenv-default-gems
+    git:
+      repo: '{{ rbenv_default_gems_url }}'
+      dest: '{{ rbenv_default_gems_path }}'
+
+  - name: Create default gems list
+    template:
+      src: templates/default-gems.j2
+      dest: '{{ rbenv_path }}/default-gems'
+    become: true
+
+  when: rbenv_default_gems_dir.stat.exists == false
+
