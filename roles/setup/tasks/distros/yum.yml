@@ -1,0 +1,12 @@
+---
+- name: Update yum cache
+  raw: yum -y update
+  become: true
+
+- name: Upgrade packages
+  raw: yum -y upgrade
+  become: true
+
+- name: Cleanup yum
+  raw: yum -y clean packages
+  become: true

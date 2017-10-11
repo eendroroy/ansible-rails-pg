@@ -1,0 +1,18 @@
+- name: Determine distribution Debian
+  raw: lsb_release -a 2>/dev/null | grep Codename | awk '{printf("%s"), $2}'
+  register: release
+  ignore_errors: yes
+
+- name: Determine distribution RHEL
+  raw: cat /etc/os-release | grep "ID=" | head -1 | tr '"' ' ' | awk '{printf("%s"), $NF}'
+  register: release
+  ignore_errors: yes
+
+- debug:
+    var: release.stdout
+
+- include_tasks: distros/apt.yml
+  when: release.stdout == 'xenial'
+
+- include_tasks: distros/yum.yml
+  when: release.stdout == 'centos' or release.stdout == 'rhel'
