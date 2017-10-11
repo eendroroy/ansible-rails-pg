@@ -6,4 +6,3 @@ tmp/*
 log/*
 !log/.gitkeep
 /rails-app
-log
