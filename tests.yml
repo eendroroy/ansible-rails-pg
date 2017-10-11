@@ -1,0 +1,6 @@
+---
+- name: Test ansible variables
+  hosts: staging
+
+  roles:
+    - test
