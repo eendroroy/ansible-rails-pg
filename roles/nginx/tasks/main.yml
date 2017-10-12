@@ -1,7 +1,7 @@
 ---
 - name: Install nginx APT
   apt:
-    package: '{ item }}'
+    package: '{{ item }}'
     state: installed
     force: yes
     update_cache: yes
@@ -11,20 +11,22 @@
     - nginx
   become: true
 
-# - name: Install nginx repo
-#   shell: 'rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm'
-#   when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
-#   become: true
+- block:
+  - name: Add nginx repo
+    template:
+      src: nginx.repo.j2
+      dest: /etc/yum.repos.d/nginx.repo
+    become: true
 
-- name: Install nginx YUM
-  yum:
-    name: '{{ item }}'
-    state: installed
-    update_cache: yes
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
-  with_items:
-    - nginx
-  become: true
+  - name: Install nginx YUM
+    yum:
+      name: '{{ item }}'
+      state: installed
+      update_cache: yes
+    with_items:
+      - nginx
+    become: true
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
 
 - name: Upload default confing
   template:
