@@ -5,7 +5,7 @@
 
 - name: Install RHEL dependencies
   import_tasks: dependencies/yum.yml
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
 
 - name: Install rbenv
   import_tasks: install-rbenv.yml

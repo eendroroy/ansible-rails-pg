@@ -31,4 +31,5 @@
       group: root
       mode: 0775
     become: true
+
   when: rbenv_bin_dir.stat.exists == false
