@@ -1,0 +1,16 @@
+---
+- name: Initial setups
+  hosts: vagrant
+  gather_facts: no
+
+  roles:
+    - setup
+
+- name: Configure Staging server
+  hosts: vagrant
+
+  roles:
+    - rails-config
+    - nginx
+    - rbenv
+    - postgres
