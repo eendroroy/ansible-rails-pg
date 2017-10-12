@@ -20,15 +20,9 @@ Vagrant.configure("2") do |config|
     s.inline = "sudo /etc/init.d/network restart"
   end
 
-  config.vm.provision "ansible variable tests" do |ansible|
-    ansible.limit = "all"
-    ansible.inventory_path = "./hosts"
-    ansible.playbook = "./tests.yml"
-  end
-
   config.vm.provision "ansible" do |ansible|
     ansible.limit = "all"
     ansible.inventory_path = "./hosts"
-    ansible.playbook = "./provision.yml"
+    ansible.playbook = "./vagrant.yml"
   end
 end
