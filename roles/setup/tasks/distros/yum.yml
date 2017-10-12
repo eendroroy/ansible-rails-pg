@@ -7,10 +7,6 @@
   raw: yum -y upgrade
   become: true
 
-- name: Install epel-release
-  raw: yum install -y epel-release
-  become: true
-
 - name: Cleanup yum
   raw: yum -y clean packages
   become: true
