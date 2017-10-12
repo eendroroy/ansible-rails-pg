@@ -4,8 +4,8 @@
     url: https://rpm.nodesource.com/setup_8.x
     dest: /tmp/nodejs.sh
 
-- name: Execute nodejs ppa
-  script: /tmp/nodejs.sh
+- name: Execute nodejs ppa installer
+  command: sh /tmp/nodejs.sh
   become: true
 
 

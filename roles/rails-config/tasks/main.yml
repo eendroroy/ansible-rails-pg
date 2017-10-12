@@ -36,4 +36,4 @@
 
 - name: Rails configuration for RHEL distros
   import_tasks: distros/yum.yml
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
