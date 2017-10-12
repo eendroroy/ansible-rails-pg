@@ -7,4 +7,5 @@
     - node_version
     - app_name
     - app_env
+    - ansible_distribution
 
