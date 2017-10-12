@@ -11,7 +11,7 @@
   raw: apt-get -y autoremove && apt-get -y clean
   become: true
 
-- name: Install python2 for xenial
+- name: Install python-simplejson for {{ release.stdout }}
   raw: apt-get install -y --force-yes python-simplejson
   when: release.stdout == 'xenial'
   become: true
