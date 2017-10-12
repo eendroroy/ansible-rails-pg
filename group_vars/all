@@ -1,4 +1,4 @@
-remote_user: vagrant
+remote_user: provisioner
 
 ruby_version: 2.4.1
 
