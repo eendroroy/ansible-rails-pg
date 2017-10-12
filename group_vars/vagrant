@@ -2,5 +2,5 @@ remote_user: vagrant
 
 app_env: vagrant
 
-postgres_user: myRobiVagrantUser
+postgres_user: VagrantUser
 postgres_user_password: vagrant_pass

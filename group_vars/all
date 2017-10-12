@@ -3,4 +3,4 @@ remote_user: provisioner
 ruby_version: 2.4.1
 
 deploy_user: deployer
-app_name: my_robi
+app_name: my_app
