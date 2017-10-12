@@ -1,0 +1,33 @@
+---
+- import_tasks: distros/yum.yml
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
+
+- name: start postgres
+  service:
+    name: postgresql-10
+    state: started
+    enabled: yes
+  become: true
+
+- postgresql_db:
+    name: '{{ app_name }}_{{ app_env }}'
+  become_user: postgres
+  become: true
+
+- postgresql_user:
+    db: '{{ app_name }}_{{ app_env }}'
+    name: '{{ postgres_user }}'
+    password: '{{ postgres_user_password }}'
+    priv: "ALL"
+    state: present
+    encrypted: true
+  become_user: postgres
+  become: true
+
+- name: Update postgres config
+  template:
+    src: pg_hba.conf.j2
+    dest: /var/lib/pgsql/10/data/pg_hba.conf
+  become: true
+  notify:
+    - restart postgres
