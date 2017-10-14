@@ -11,10 +11,24 @@
 - debug:
     var: release.stdout
 
-- name: Initial setup for Debian
-  import_tasks: distros/apt.yml
-  when: release.stdout == 'xenial'
+- name: Update yum cache
+  raw: yum -y update
+  become: true
 
-- name: Initial setup for RHEL
-  import_tasks: distros/yum.yml
-  when: release.stdout == 'centos' or release.stdout == 'rhel'
+- name: Upgrade packages
+  raw: yum -y upgrade
+  become: true
+
+- name: Cleanup yum
+  raw: yum -y clean packages
+  become: true
+
+- name: Get pip installer
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+
+- name: Install pip
+  raw: python /tmp/get-pip.py
+  become: true
+
