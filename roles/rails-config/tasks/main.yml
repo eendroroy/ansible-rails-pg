@@ -30,10 +30,20 @@
     owner: '{{ deploy_user }}'
   become: true
 
-- name: Rails configuration for debian distros
-  import_tasks: distros/apt.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+- name: Add nodejs ppa RHEL
+  get_url: 
+    url: https://rpm.nodesource.com/setup_8.x
+    dest: /tmp/nodejs.sh
 
-- name: Rails configuration for RHEL distros
-  import_tasks: distros/yum.yml
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
+- name: Execute nodejs ppa installer
+  command: sh /tmp/nodejs.sh
+  become: true
+
+
+- name: Install nodejs YUM
+  yum:
+    name: nodejs
+    state: installed
+    update_cache: yes
+  become: true
+
