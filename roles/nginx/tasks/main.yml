@@ -1,32 +1,18 @@
 ---
-- name: Install nginx APT
-  apt:
-    package: '{{ item }}'
+- name: Add nginx repo
+  template:
+    src: nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+  become: true
+
+- name: Install nginx YUM
+  yum:
+    name: '{{ item }}'
     state: installed
-    force: yes
     update_cache: yes
-    cache_valid_time: 360
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   with_items:
     - nginx
   become: true
-
-- block:
-  - name: Add nginx repo
-    template:
-      src: nginx.repo.j2
-      dest: /etc/yum.repos.d/nginx.repo
-    become: true
-
-  - name: Install nginx YUM
-    yum:
-      name: '{{ item }}'
-      state: installed
-      update_cache: yes
-    with_items:
-      - nginx
-    become: true
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
 
 - name: Upload default confing
   template:
