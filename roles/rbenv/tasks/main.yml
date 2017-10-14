@@ -1,11 +1,21 @@
 ---
-- name: Install debian dependencies
-  import_tasks: dependencies/apt.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-- name: Install RHEL dependencies
-  import_tasks: dependencies/yum.yml
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'RedHat'
+- name: Install dependencies YUM
+  yum:
+    name: '{{ item }}'
+    state: installed
+    update_cache: yes
+  with_items:
+    - git
+    - gcc
+    - bzip2
+    - openssl-devel
+    - libyaml-devel
+    - libffi-devel
+    - readline-devel
+    - zlib-devel
+    - gdbm-devel
+    - ncurses-devel
+  become: true
 
 - name: Install rbenv
   import_tasks: install-rbenv.yml
