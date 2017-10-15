@@ -1,6 +1,6 @@
-remote_user: provisioner
+remote_user: vagrant
 
 ruby_version: 2.4.2
 
 deploy_user: deployer
-app_name: my_app
+app_name: application
