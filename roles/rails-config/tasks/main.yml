@@ -39,7 +39,6 @@
   command: sh /tmp/nodejs.sh
   become: true
 
-
 - name: Install nodejs YUM
   yum:
     name: nodejs
@@ -47,3 +46,11 @@
     update_cache: yes
   become: true
 
+- name: Install dependencies YUM
+  yum:
+    name: '{{ item }}'
+    state: installed
+    update_cache: yes
+  become: true
+  with_items:
+    - gcc-c++
