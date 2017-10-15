@@ -1,5 +1,5 @@
 ---
-- name: Initial setups
+- name: Initial setup
   hosts: vagrant
   gather_facts: no
 

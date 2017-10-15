@@ -1,15 +1,16 @@
 ---
-# - name: Initial setup
-#   hosts: staging
-#   gather_facts: no
+- name: Initial setup
+  hosts: staging
+  gather_facts: no
 
-#   roles:
-#     - setup
+  roles:
+    - setup
 
 - name: Configure Staging server
   hosts: staging
 
   roles:
-    # - rails-config
-    # - nginx
+    - rails-config
+    - nginx
     - rbenv
+    - postgres
