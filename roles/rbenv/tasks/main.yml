@@ -9,7 +9,7 @@
     - gcc
     - bzip2
     - openssl-devel
-    - libyaml-devel
+    - libyaml
     - libffi-devel
     - readline-devel
     - zlib-devel

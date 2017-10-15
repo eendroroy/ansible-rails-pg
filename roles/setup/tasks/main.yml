@@ -22,13 +22,3 @@
 - name: Cleanup yum
   raw: yum -y clean packages
   become: true
-
-- name: Get pip installer
-  get_url:
-    url: https://bootstrap.pypa.io/get-pip.py
-    dest: /tmp/get-pip.py
-
-- name: Install pip
-  raw: python /tmp/get-pip.py
-  become: true
-

@@ -7,11 +7,13 @@
 
 - block:
   - name: Install ruby {{ ruby_version }}
-    raw: 'RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv install {{ ruby_version }}'
+    raw: 'TMPDIR=~/tmp MAKE_OPTS=-j4 RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv install {{ ruby_version }}'
     become: true
+    become_user: '{{ remote_user }}'
 
   - name: Rehash ruby installations
     raw: 'RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv rehash'
     become: true
+    become_user: '{{ remote_user }}'
 
   when: ruby.stat.exists == false

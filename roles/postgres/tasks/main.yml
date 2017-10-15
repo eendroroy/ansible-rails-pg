@@ -39,12 +39,7 @@
     - postgresql10-server
     - postgresql10-libs
     - postgresql10-devel
-
-- name: Install python psycopg2 module
-  pip:
-    name: psycopg2
-    state: present
-  become: true
+    - python-psycopg2
 
 - name: Check if postgres data-dir is initialized
   find: 

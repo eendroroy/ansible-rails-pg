@@ -13,6 +13,7 @@
       group: '{{ remote_user }}'
       owner: '{{ remote_user }}'
     become: true
+    become_user: '{{ remote_user }}'
 
   - name: Clone rbenv
     git:
