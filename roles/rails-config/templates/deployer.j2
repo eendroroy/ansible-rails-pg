@@ -3,7 +3,13 @@
 {{ deploy_user }} ALL=NOPASSWD:/bin/ln -nfs /home/{{ deploy_user }}/* /etc/nginx/sites-enabled/*
 {{ deploy_user }} ALL=NOPASSWD:/bin/ln -nfs /home/{{ deploy_user }}/* /etc/init.d/*
 {{ deploy_user }} ALL=NOPASSWD:/bin/ln -nfs /home/{{ deploy_user }}/* /etc/logrotate.d/*
-{{ deploy_user }} ALL=NOPASSWD:/bin/ln -nfs /home/{{ deploy_user }}/* /usr/local/bin/run_puma_{{ app_name}}_{{ app_env }}
-{{ deploy_user }} ALL=NOPASSWD:/etc/init.d/nginx
-{{ deploy_user }} ALL=NOPASSWD:/etc/init.d/puma_{{ app_name }}_{{ app_env }}
-{{ deploy_user }} ALL=NOPASSWD:/usr/sbin/service puma_{{ app_name }}_{{ app_env }}
+{{ deploy_user }} ALL=NOPASSWD:/bin/ln -nfs /home/{{ deploy_user }}/* /usr/local/bin/
+{{ deploy_user }} ALL=NOPASSWD:/bin/mv /home/{{ deploy_user }}/* /etc/nginx/conf.d/*
+{{ deploy_user }} ALL=NOPASSWD:/bin/mv /home/{{ deploy_user }}/* /etc/nginx/sites-enabled/*
+{{ deploy_user }} ALL=NOPASSWD:/bin/mv /home/{{ deploy_user }}/* /etc/init.d/*
+{{ deploy_user }} ALL=NOPASSWD:/bin/mv /home/{{ deploy_user }}/* /etc/logrotate.d/*
+{{ deploy_user }} ALL=NOPASSWD:/bin/mv /home/{{ deploy_user }}/* /usr/local/bin/run_puma_{{ app_name}}_{{ app_env }}
+{{ deploy_user }} ALL=NOPASSWD:/etc/init.d/nginx *
+{{ deploy_user }} ALL=NOPASSWD:/usr/sbin/service nginx *
+{{ deploy_user }} ALL=NOPASSWD:/etc/init.d/puma_{{ app_name }}_{{ app_env }} *
+{{ deploy_user }} ALL=NOPASSWD:/usr/sbin/service puma_{{ app_name }}_{{ app_env }} *
