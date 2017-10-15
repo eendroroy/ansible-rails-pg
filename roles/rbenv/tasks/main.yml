@@ -32,3 +32,13 @@
 - name: Make sure bundler is installed
   raw: 'RBENV_ROOT={{ rbenv_path }} RBENV_VERSION={{ ruby_version }} {{ rbenv_path }}/bin/rbenv exec gem install bundler'
   become: true
+
+- name: Update folder permissionos
+  file:
+    dest: '{{ rbenv_path }}'
+    owner: '{{ deploy_user }}'
+    group: '{{ deploy_user }}'
+    mode: 0775
+    recurse: true
+  become: true
+
