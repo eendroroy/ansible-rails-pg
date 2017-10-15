@@ -14,6 +14,15 @@
     - nginx
   become: true
 
+- name: Ensure configuration directorie exists
+  file:
+    path: '{{ item }}'
+    state: directory
+  become: true
+  with_items:
+    - /etc/nginx/sites-enabled
+    - /etc/nginx/sites-available
+
 - name: Upload default confing
   template:
     src: nginx.conf.j2
