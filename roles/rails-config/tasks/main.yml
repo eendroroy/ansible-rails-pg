@@ -54,3 +54,5 @@
   become: true
   with_items:
     - gcc-c++
+    - ImageMagick
+
