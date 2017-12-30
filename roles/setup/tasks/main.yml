@@ -4,21 +4,43 @@
   ignore_errors: yes
 
 - name: Determine distribution RHEL
-  raw: cat /etc/os-release | grep "ID=" | head -1 | tr '"' ' ' | awk '{printf("%s"), $NF}'
+  raw: cat /etc/os-release | grep "ID=" | head -1 | tr '"' ' ' | awk '{gsub("ID=","",$NF); printf("%s"), $NF}'
   register: release
   ignore_errors: yes
 
 - debug:
     var: release.stdout
 
-- name: Update yum cache
-  raw: yum -y update
-  become: true
+- block:
+  - name: Update yum cache
+    raw: yum -y update
+    become: true
 
-- name: Upgrade packages
-  raw: yum -y upgrade
-  become: true
+  - name: Upgrade packages
+    raw: yum -y upgrade
+    become: true
 
-- name: Cleanup yum
-  raw: yum -y clean packages
-  become: true
+  - name: Cleanup yum
+    raw: yum -y clean packages
+    become: true
+
+  when: release.stdout == 'centos'
+
+- block:
+  - name: Update apt cache
+    raw: apt-get -y update
+    become: true
+
+  - name: Upgrade apt packages
+    raw: apt-get -y upgrade
+    become: true
+
+  - name: Upgrade apt packages
+    raw: apt-get install -y python-simplejson
+    become: true
+
+  - name: Cleanup apt
+    raw: apt-get -y autoremove && apt-get -y autoclean
+    become: true
+
+  when: release.stdout == 'ubuntu'

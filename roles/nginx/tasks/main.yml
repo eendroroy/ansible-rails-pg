@@ -1,14 +1,11 @@
 ---
-- name: Add nginx repo
-  template:
-    src: nginx.repo.j2
-    dest: /etc/yum.repos.d/nginx.repo
-  become: true
+- import_tasks: yum/add_nginx_repo.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- import_task: apt/install_nginx.yml
+- import_tasks: apt/install_nginx.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- import_task: yum/install_nginx.yml
+- import_tasks: yum/install_nginx.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Ensure configuration directorie exists
