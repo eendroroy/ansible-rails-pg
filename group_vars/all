@@ -1,5 +1,3 @@
-remote_user: vagrant
-
 ruby_version: 2.5.0
 
 deploy_user: deployer
