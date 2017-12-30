@@ -5,14 +5,11 @@
     dest: /etc/yum.repos.d/nginx.repo
   become: true
 
-- name: Install nginx YUM
-  yum:
-    name: '{{ item }}'
-    state: installed
-    update_cache: yes
-  with_items:
-    - nginx
-  become: true
+- import_task: apt/install_nginx.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- import_task: yum/install_nginx.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Ensure configuration directorie exists
   file:

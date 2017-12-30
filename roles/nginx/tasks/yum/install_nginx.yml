@@ -1,0 +1,9 @@
+---
+- name: Install nginx YUM
+  yum:
+    name: '{{ item }}'
+    state: installed
+    update_cache: yes
+  with_items:
+    - nginx
+  become: true
