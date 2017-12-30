@@ -1,0 +1,17 @@
+- name: Install dependencies APT
+  apt:
+    name: '{{ item }}'
+    state: installed
+    update_cache: yes
+  with_items:
+    - git
+    - gcc
+    - bzip2
+    - libssl-dev
+    - libyaml-dev
+    - libffi-dev
+    - libreadline-dev
+    - zlib1g-dev
+    - libgdbm-dev
+    - ncurses-dev
+  become: true
