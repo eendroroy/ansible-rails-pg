@@ -1,3 +1,4 @@
+---
 - name: Create deployment user
   user:
     name: '{{ deploy_user }}'
@@ -38,14 +39,14 @@
     owner: '{{ deploy_user }}'
   become: true
 
-- import_tasks: yum/install_node.yml
+- include_tasks: yum/install_node.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- import_tasks: apt/install_node.yml
+- include_tasks: apt/install_node.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- import_tasks: yum/install_deps.yml
+- include_tasks: yum/install_deps.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- import_tasks: apt/install_deps.yml
+- include_tasks: apt/install_deps.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
