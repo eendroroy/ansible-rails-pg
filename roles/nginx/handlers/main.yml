@@ -5,3 +5,4 @@
     state: restarted
     enabled: yes
   become: true
+  ignore_errors: yes
