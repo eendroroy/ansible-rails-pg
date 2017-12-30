@@ -1,6 +1,6 @@
 remote_user: vagrant
 
-ruby_version: 2.4.2
+ruby_version: 2.5.0
 
 deploy_user: deployer
 app_name: application

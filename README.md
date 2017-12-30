@@ -5,7 +5,7 @@ On RHEL base repo needs to be enabled using `subscription-manager`.
 
 ## Features
 
-- System wide `rbenv` installation with ruby 2.4.2 and bundler gem
+- System wide `rbenv` installation with ruby 2.5.0 and bundler gem
 - PostgreSQL 10 with environment specific (staging or production) database and user with default configuration
 - Nginx with minimal configuration (application specific configurations should be uploaded during rails application deployment). see [puma-deploy](https://github.com/puma-deploy)
 - Some common dependencies required for rails applications
