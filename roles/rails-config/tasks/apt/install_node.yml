@@ -1,0 +1,11 @@
+---
+- name: Add nodejs ppa APT
+  raw: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  become: true
+
+- name: Install nodejs APT
+  apt:
+    name: nodejs
+    state: installed
+    update_cache: yes
+  become: true

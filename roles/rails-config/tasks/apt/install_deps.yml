@@ -1,0 +1,10 @@
+---
+- name: Install dependencies APT
+  apt:
+    name: '{{ item }}'
+    state: installed
+    update_cache: yes
+  become: true
+  with_items:
+    - g++
+    - imagemagick

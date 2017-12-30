@@ -4,6 +4,14 @@
     comment: "Application deployment user"
   become: true
 
+- name: Current user
+  raw: echo -ne "`whoami`"
+  register: user
+  ignore_errors: yes
+
+- debug:
+    var: user.stdout
+
 - name: Update user permissions
   template:
     src: templates/deployer.j2
@@ -24,35 +32,20 @@
 - name: "Update {{ deploy_user }}'s allowed keys"
   copy:
     remote_src: true
-    src: /home/{{ remote_user }}/.ssh/authorized_keys
+    src: /home/{{ user.stdout }}/.ssh/authorized_keys
     dest: /home/{{ deploy_user }}/.ssh/authorized_keys
     group: '{{ deploy_user }}'
     owner: '{{ deploy_user }}'
   become: true
 
-- name: Add nodejs ppa RHEL
-  get_url: 
-    url: https://rpm.nodesource.com/setup_8.x
-    dest: /tmp/nodejs.sh
+- import_tasks: yum/install_node.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Execute nodejs ppa installer
-  command: sh /tmp/nodejs.sh
-  become: true
+- import_tasks: apt/install_node.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Install nodejs YUM
-  yum:
-    name: nodejs
-    state: installed
-    update_cache: yes
-  become: true
+- import_tasks: yum/install_deps.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Install dependencies YUM
-  yum:
-    name: '{{ item }}'
-    state: installed
-    update_cache: yes
-  become: true
-  with_items:
-    - gcc-c++
-    - ImageMagick
-
+- import_tasks: apt/install_deps.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
