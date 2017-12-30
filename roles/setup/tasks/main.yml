@@ -1,3 +1,4 @@
+---
 - name: Determine distribution Debian
   raw: lsb_release -a 2>/dev/null | grep Codename | awk '{printf("%s"), $2}'
   register: release
