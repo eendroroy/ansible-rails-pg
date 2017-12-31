@@ -16,6 +16,6 @@
       src: templates/default-gems.j2
       dest: '{{ rbenv_path }}/default-gems'
     become: true
-    become_user: '{{ remote_user }}'
+    become_user: '{{ ansible_user_id }}'
 
   when: rbenv_default_gems_dir.stat.exists == false

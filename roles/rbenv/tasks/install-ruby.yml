@@ -9,11 +9,11 @@
   - name: Install ruby {{ ruby_version }}
     raw: 'TMPDIR=~/tmp MAKE_OPTS=-j4 RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv install {{ ruby_version }}'
     become: true
-    become_user: '{{ remote_user }}'
+    become_user: '{{ ansible_user_id }}'
 
   - name: Rehash ruby installations
     raw: 'RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv rehash'
     become: true
-    become_user: '{{ remote_user }}'
+    become_user: '{{ ansible_user_id }}'
 
   when: ruby.stat.exists == false

@@ -10,10 +10,10 @@
     file:
       path: '{{ rbenv_path }}'
       state: directory
-      group: '{{ remote_user }}'
-      owner: '{{ remote_user }}'
+      group: '{{ ansible_user_id }}'
+      owner: '{{ ansible_user_id }}'
     become: true
-    become_user: '{{ remote_user }}'
+    become_user: '{{ ansible_user_id }}'
 
   - name: Clone rbenv
     git:
