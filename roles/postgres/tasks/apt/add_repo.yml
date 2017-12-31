@@ -1,13 +1,6 @@
 ---
-- name: Determine distribution {{ ansible_os_family }}
-  raw: lsb_release -a 2>/dev/null | grep Codename | awk '{printf("%s"), $2}'
-  register: release
-
-- debug:
-    var: release.stdout
-
 - name: Download postgresql 10 repository {{ ansible_os_family }}
-  raw: sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ {{ release.stdout }}-pgdg main'
+  raw: sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
 
 - name: Import posgres 10 key APT
   raw: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
