@@ -1,33 +1,33 @@
 ---
 - include_tasks: yum/add_repo.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: apt/add_repo.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
 
 - include_tasks: yum/install_postgres.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: apt/install_postgres.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
 
 - include_tasks: yum/init_db.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: yum/enable_service.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: yum/start_service.yml
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: apt/start_service.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == 'Debian'
 
 - include_tasks: yum/update_config.yml
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == 'RedHat'
 
 - include_tasks: apt/update_config.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == 'Debian'
 
 - name: Ensure database {{ app_name }}_{{ app_env }} exists
   postgresql_db:
