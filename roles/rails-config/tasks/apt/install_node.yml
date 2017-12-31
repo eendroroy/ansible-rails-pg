@@ -1,5 +1,5 @@
 ---
-- name: Add nodejs ppa APT
+- name: Add nodejs ppa {{ ansible_os_family }}
   raw: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
   become: true
 

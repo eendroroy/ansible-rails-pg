@@ -1,5 +1,5 @@
 ---
-- name: Install nginx YUM
+- name: Install nginx {{ ansible_os_family }}
   yum:
     name: '{{ item }}'
     state: installed

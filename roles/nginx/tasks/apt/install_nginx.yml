@@ -1,5 +1,5 @@
 ---
-- name: Install nginx APT
+- name: Install nginx {{ ansible_os_family }}
   apt:
     name: '{{ item }}'
     state: installed

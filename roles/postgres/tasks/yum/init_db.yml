@@ -1,5 +1,5 @@
 ---
-- name: Check if postgres data-dir is initialized
+- name: Check if postgres data-dir is initialized {{ ansible_os_family }}
   find: 
     paths: /var/lib/pgsql/10/data
     file_type: directory

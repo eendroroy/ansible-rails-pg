@@ -1,5 +1,5 @@
 ---
-- name: Add nginx repo YUM
+- name: Add nginx repo {{ ansible_os_family }}
   template:
     src: nginx.repo.j2
     dest: /etc/yum.repos.d/nginx.repo

@@ -1,5 +1,5 @@
 ---
-- name: Add nodejs ppa RHEL
+- name: Add nodejs ppa {{ ansible_os_family }}
   get_url: 
     url: https://rpm.nodesource.com/setup_8.x
     dest: /tmp/nodejs.sh
@@ -8,7 +8,7 @@
   command: sh /tmp/nodejs.sh
   become: true
 
-- name: Install nodejs YUM
+- name: Install nodejs {{ ansible_os_family }}
   yum:
     name: nodejs
     state: installed

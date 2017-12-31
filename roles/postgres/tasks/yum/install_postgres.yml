@@ -1,5 +1,5 @@
 ---
-- name: Install postgresql 10 YUM
+- name: Install postgresql 10 {{ ansible_os_family }}
   yum:
     name: '{{ item }}'
     state: installed
