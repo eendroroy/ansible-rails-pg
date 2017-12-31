@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define 'centos7' do |centos7|
-  centos7.vm.box = "centos/7"
+    centos7.vm.box = "centos/7"
     centos7.vm.network "private_network", ip: "192.168.33.11"  
   end
 end
