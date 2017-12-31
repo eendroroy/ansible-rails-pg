@@ -7,4 +7,6 @@
     - app_name
     - app_env
     - ansible_distribution
+    - ansible_os_family
+    - ansible_user_id
 
