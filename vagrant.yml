@@ -13,4 +13,4 @@
     - rails-config
     - nginx
     - rbenv
-    # - postgres
+    - postgres
