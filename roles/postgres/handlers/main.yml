@@ -5,6 +5,7 @@
     state: restarted
     enabled: yes
   become: true
+  when: ansible_os_family == "RedHat"
 
 - name: start postgres
   service:
@@ -12,3 +13,20 @@
     state: started
     enabled: yes
   become: true
+  when: ansible_os_family == "RedHat"
+
+- name: restart postgres
+  service:
+    name: postgresql
+    state: restarted
+    enabled: yes
+  become: true
+  when: ansible_os_family == "Debian"
+
+- name: start postgres
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: true
+  when: ansible_os_family == "Debian"

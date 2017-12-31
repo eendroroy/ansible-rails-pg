@@ -1,0 +1,5 @@
+---
+- name : Enable postgres service
+  raw: systemctl enable postgresql-10.service
+  become: true
+  notify: start postgres

@@ -1,81 +1,34 @@
 ---
-- block:
-  - name: Download postgresql 10 repository for CentOS
-    get_url:
-      url: https://download.postgresql.org/pub/repos/yum/testing/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
-      dest: /tmp/pgdg-centos10-10-2.noarch.rpm
+- include_tasks: yum/add_repo.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-  - name: Install postgresql 10 repository for CentOS
-    yum:
-      name: '{{ item }}'
-      state: installed
-    become: true
-    with_items:
-      - /tmp/pgdg-centos10-10-2.noarch.rpm
-  when: ansible_distribution == 'CentOS'
+- include_tasks: apt/add_repo.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- block:
-  - name: Download postgresql 10 repository for RedHat
-    get_url:
-      url: https://download.postgresql.org/pub/repos/yum/testing/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
-      dest: /tmp/pgdg-redhat10-10-2.noarch.rpm
+- include_tasks: yum/install_postgres.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-  - name: Install postgresql 10 repository for RedHat
-    yum:
-      name: '{{ item }}'
-      state: installed
-    become: true
-    with_items:
-      - /tmp/pgdg-redhat10-10-2.noarch.rpm
-  when: ansible_distribution == 'RedHat'
+- include_tasks: apt/install_postgres.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Install postgresql 10
-  yum:
-    name: '{{ item }}'
-    state: installed
-    update_cache: true
-  become: true
-  with_items:
-    - postgresql10-server
-    - postgresql10-libs
-    - postgresql10-devel
-    - python-psycopg2
+- include_tasks: yum/init_db.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Check if postgres data-dir is initialized
-  find: 
-    paths: /var/lib/pgsql/10/data
-    file_type: directory
-    patterns: "*"
-  register: psql_data
-  become: true
-  ignore_errors: yes
+- include_tasks: yum/enable_service.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Initialize postgres data-dir
-  raw: /usr/pgsql-10/bin/postgresql-10-setup initdb
-  become: true
-  ignore_errors: true
-  when: psql_data.matched|int == 0
+- include_tasks: yum/start_service.yml
+  when: ansible_os_family == "RedHat"
 
-- name : Enable postgres service
-  raw: systemctl enable postgresql-10.service
-  become: true
-  notify: start postgres
+- include_tasks: apt/start_service.yml
+  when: ansible_os_family == "Debian"
 
-- name: Start postgres
-  service:
-    name: postgresql-10
-    state: started
-    enabled: yes
-  become: true
+- include_tasks: yum/update_config.yml
+  when: ansible_os_family == "RedHat"
 
-- name: Update postgres config
-  template:
-    src: pg_hba.conf.j2
-    dest: /var/lib/pgsql/10/data/pg_hba.conf
-  become: true
-  notify:
-    - restart postgres
-# 
+- include_tasks: apt/update_config.yml
+  when: ansible_os_family == "Debian"
+
 - name: Ensure database {{ app_name }}_{{ app_env }} exists
   postgresql_db:
     name: '{{ app_name }}_{{ app_env }}'

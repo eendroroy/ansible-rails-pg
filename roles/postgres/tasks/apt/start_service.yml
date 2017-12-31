@@ -1,0 +1,7 @@
+---
+- name: Start postgres {{ ansible_os_family }}
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: true

@@ -1,0 +1,12 @@
+---
+- name: Install postgresql 10 YUM
+  yum:
+    name: '{{ item }}'
+    state: installed
+    update_cache: true
+  become: true
+  with_items:
+    - postgresql10-server
+    - postgresql10-libs
+    - postgresql10-devel
+    - python-psycopg2

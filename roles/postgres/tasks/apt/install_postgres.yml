@@ -1,0 +1,11 @@
+---
+- name: Install postgresql 10 APT
+  apt:
+    name: '{{ item }}'
+    state: installed
+    update_cache: true
+  become: true
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - python-psycopg2

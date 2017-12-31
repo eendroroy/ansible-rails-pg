@@ -1,0 +1,8 @@
+---
+- name: Update postgres config {{ ansible_os_family }}
+  template:
+    src: pg_hba.conf.j2
+    dest: /etc/postgresql/10/main/pg_hba.conf
+  become: true
+  notify:
+    - restart postgres

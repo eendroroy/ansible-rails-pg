@@ -1,0 +1,30 @@
+---
+- block:
+  - name: Download postgresql 10 repository for CentOS
+    get_url:
+      url: https://download.postgresql.org/pub/repos/yum/testing/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+      dest: /tmp/pgdg-centos10-10-2.noarch.rpm
+
+  - name: Install postgresql 10 repository for CentOS
+    yum:
+      name: '{{ item }}'
+      state: installed
+    become: true
+    with_items:
+      - /tmp/pgdg-centos10-10-2.noarch.rpm
+  when: ansible_distribution == 'CentOS'
+
+- block:
+  - name: Download postgresql 10 repository for RedHat
+    get_url:
+      url: https://download.postgresql.org/pub/repos/yum/testing/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
+      dest: /tmp/pgdg-redhat10-10-2.noarch.rpm
+
+  - name: Install postgresql 10 repository for RedHat
+    yum:
+      name: '{{ item }}'
+      state: installed
+    become: true
+    with_items:
+      - /tmp/pgdg-redhat10-10-2.noarch.rpm
+  when: ansible_distribution == 'RedHat' or ansible_distribution == 'Red Hat Enterprise Linux'
