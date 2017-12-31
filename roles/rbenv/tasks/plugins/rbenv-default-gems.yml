@@ -19,4 +19,3 @@
     become_user: '{{ remote_user }}'
 
   when: rbenv_default_gems_dir.stat.exists == false
-
