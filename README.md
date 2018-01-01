@@ -8,7 +8,7 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/ansible-rails-pg.svg)](https://github.com/eendroroy/ansible-rails-pg/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/ansible-rails-pg.svg)](https://github.com/eendroroy/ansible-rails-pg/pulls?q=is%3Apr+is%3Aclosed)
 
-Setup environment for deploying rails application on a `Debian` and `RPM based` os
+Setup environment for deploying rails application on a `Debian` or `RPM based` os
 (`Debian`, `Ubuntu`, `RHEL`, `CentOS`, `Fedora`).
 Base repo needs to be enabled using `subscription-manager` on `RHEL`.
 
@@ -21,7 +21,7 @@ Tested on `Ubuntu 16.04`, `CentOS 7`, and `RedHat 7`
 - System wide `rbenv` installation with ruby 2.5.0 and bundler gem
 - PostgreSQL 10 with environment specific (staging or production) database and user with default configuration
 - Nginx with minimal configuration (application specific configurations should be uploaded during rails application deployment).
-  See [puma-deploy](https://github.com/puma-deploy)
+  See [puma-deploy](https://github.com/eendroroy/puma-deploy)
 - Some common dependencies required for rails applications
 - Create deploy user with ssh access and specific sudo permission required to deploy rails application
 
