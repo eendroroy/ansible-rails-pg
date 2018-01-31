@@ -6,13 +6,15 @@
     update_cache: yes
   with_items:
     - git
-    - gcc
-    - bzip2
+    - autoconf
+    - bison
+    - build-essential
     - libssl-dev
     - libyaml-dev
-    - libffi-dev
-    - libreadline-dev
+    - libreadline6-dev
     - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
     - libgdbm-dev
-    - ncurses-dev
   become: true

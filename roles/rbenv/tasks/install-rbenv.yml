@@ -13,7 +13,6 @@
       group: '{{ ansible_user_id }}'
       owner: '{{ ansible_user_id }}'
     become: true
-    become_user: '{{ ansible_user_id }}'
 
   - name: Clone rbenv
     git:
