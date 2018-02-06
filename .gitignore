@@ -1,8 +1,7 @@
 **/.vagrant
 **/*.log
 **/*.retry
-.python-version
 tmp/*
+!tmp/.gitkeep
 log/*
 !log/.gitkeep
-/rails-app
