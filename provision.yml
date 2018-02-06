@@ -1,16 +1,21 @@
 ---
 - name: Initial setup
-  hosts: vagrant
+  hosts: all
   gather_facts: no
 
   roles:
     - setup
 
-- name: Configure Staging server
-  hosts: vagrant
+- name: Configure Web server
+  hosts: web
 
   roles:
     - rails-config
     - nginx
     - rbenv
+
+- name: Configure DB server
+  hosts: db
+
+  roles:
     - postgres
