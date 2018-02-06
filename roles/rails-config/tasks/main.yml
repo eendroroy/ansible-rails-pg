@@ -5,14 +5,6 @@
     comment: "Application deployment user"
   become: true
 
-- name: Current user
-  raw: echo -ne "`whoami`"
-  register: user
-  ignore_errors: yes
-
-- debug:
-    var: user.stdout
-
 - name: Update user permissions
   template:
     src: templates/deployer.j2
@@ -33,7 +25,7 @@
 - name: "Update {{ deploy_user }}'s allowed keys"
   copy:
     remote_src: true
-    src: /home/{{ user.stdout }}/.ssh/authorized_keys
+    src: /home/{{ ansible_user }}/.ssh/authorized_keys
     dest: /home/{{ deploy_user }}/.ssh/authorized_keys
     group: '{{ deploy_user }}'
     owner: '{{ deploy_user }}'
