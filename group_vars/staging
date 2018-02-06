@@ -1,4 +1,0 @@
-app_env: staging
-
-postgres_user: StagingUser
-postgres_user_password: staging_pass

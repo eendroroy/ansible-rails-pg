@@ -1,0 +1,9 @@
+---
+ruby_version: 2.5.0
+deploy_user: deployer
+app_name: application
+deploy_path: '/apps'
+app_env: staging
+databases:
+  - { db_user: ProductionUser, db_password: production_pass }
+  - { db_user: StagingUser,    db_password: staging_pass }

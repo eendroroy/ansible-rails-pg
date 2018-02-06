@@ -1,4 +1,0 @@
-app_env: production
-
-postgres_user: ProductionUser
-postgres_user_password: production_pass

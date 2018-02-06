@@ -1,4 +1,0 @@
-app_env: vagrant
-
-postgres_user: VagrantUser
-postgres_user_password: vagrant_pass
