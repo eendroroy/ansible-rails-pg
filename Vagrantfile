@@ -10,11 +10,6 @@ Vagrant.configure("2") do |config|
   end
 
   # WEB hosts
-  config.vm.define 'precise-web' do |precise|
-    precise.vm.box = "ubuntu/precise64"
-    precise.vm.network "private_network", ip: "192.168.33.10"  
-  end
-
   config.vm.define 'trusty-web' do |trusty|
     trusty.vm.box = "ubuntu/trusty64"
     trusty.vm.network "private_network", ip: "192.168.33.11"  
@@ -31,11 +26,6 @@ Vagrant.configure("2") do |config|
   end
 
   # DB hosts
-  config.vm.define 'precise-db' do |precise|
-    precise.vm.box = "ubuntu/precise64"
-    precise.vm.network "private_network", ip: "192.168.33.14"  
-  end
-
   config.vm.define 'trusty-db' do |trusty|
     trusty.vm.box = "ubuntu/trusty64"
     trusty.vm.network "private_network", ip: "192.168.33.15"  
