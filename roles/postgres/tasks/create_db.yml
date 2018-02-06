@@ -1,0 +1,18 @@
+---
+- name: Ensure database {{ item.db_name }} exists
+  postgresql_db:
+    name: '{{ item.db_name }}'
+    state: present
+  become_user: postgres
+  become: true
+
+- name: Ensure user {{ item.db_user }} exists
+  postgresql_user:
+    db: '{{ item.db_name }}'
+    name: '{{ item.db_user }}'
+    password: '{{ item.db_password }}'
+    priv: "ALL"
+    state: present
+    encrypted: true
+  become_user: postgres
+  become: true

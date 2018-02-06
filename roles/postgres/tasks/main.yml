@@ -1,53 +1,36 @@
 ---
-- include_tasks: yum/add_repo.yml
+- import_tasks: yum/add_repo.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: apt/add_repo.yml
+- import_tasks: apt/add_repo.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: yum/install_postgres.yml
+- import_tasks: yum/install_postgres.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: apt/install_postgres.yml
+- import_tasks: apt/install_postgres.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: yum/init_db.yml
+- import_tasks: yum/init_db.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: yum/enable_service.yml
+- import_tasks: yum/enable_service.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: yum/start_service.yml
+- import_tasks: yum/start_service.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: apt/start_service.yml
+- import_tasks: apt/start_service.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: yum/update_config.yml
+- import_tasks: yum/update_config.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: apt/update_config.yml
+- import_tasks: apt/update_config.yml
   when: ansible_os_family == 'Debian'
 
-- block:
-  - name: Ensure database {{ item.db_name }} exists
-    postgresql_db:
-      name: '{{ item.db_name }}'
-      state: present
-    become_user: postgres
-    become: true
-
-  - name: Ensure user {{ item.db_user }} exists
-    postgresql_user:
-      db: '{{ item.db_name }}'
-      name: '{{ item.db_user }}'
-      password: '{{ item.db_password }}'
-      priv: "ALL"
-      state: present
-      encrypted: true
-    become_user: postgres
-    become: true
-    notify:
-      - restart postgres
+- include_tasks: create_db.yml
+  notify:
+    - restart postgres
   with_items:
     - '{{ databases }}'
