@@ -7,7 +7,7 @@
 
 - block:
   - name: Install ruby {{ ruby_version }}
-    raw: 'TMPDIR=~/tmp MAKE_OPTS=-j4 RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv install {{ ruby_version }}'
+    raw: 'TMPDIR=~/tmp/ MAKE_OPTS=-j{{ ansible_processor_cores }} RUBY_CONFIGURE_OPTS=--disable-install-doc RBENV_ROOT={{ rbenv_path }} {{ rbenv_path }}/bin/rbenv install {{ ruby_version }}'
     become: true
     become_user: '{{ ansible_user_id }}'
 

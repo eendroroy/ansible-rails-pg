@@ -16,5 +16,5 @@
     - libncurses5-dev
     - libffi-dev
     - libgdbm3
-    - libgdbm-dev
+    - libgdbm-dev   
   become: true
