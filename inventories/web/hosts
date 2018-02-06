@@ -1,5 +1,4 @@
 [web]
-192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/precise-web/virtualbox/private_key
 192.168.33.11 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/trusty-web/virtualbox/private_key
 192.168.33.12 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/xenial-web/virtualbox/private_key
 192.168.33.13 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/centos7-web/virtualbox/private_key

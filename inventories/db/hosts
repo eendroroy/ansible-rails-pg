@@ -1,5 +1,4 @@
 [db]
-192.168.33.14 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/precise-db/virtualbox/private_key
 192.168.33.15 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/trusty-db/virtualbox/private_key
 192.168.33.16 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/xenial-db/virtualbox/private_key
 192.168.33.17 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/centos7-db/virtualbox/private_key
