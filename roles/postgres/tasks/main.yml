@@ -29,22 +29,25 @@
 - include_tasks: apt/update_config.yml
   when: ansible_os_family == 'Debian'
 
-- name: Ensure database {{ app_name }}_{{ app_env }} exists
-  postgresql_db:
-    name: '{{ app_name }}_{{ app_env }}'
-    state: present
-  become_user: postgres
-  become: true
+- block:
+  - name: Ensure database {{ item.db_name }} exists
+    postgresql_db:
+      name: '{{ item.db_name }}'
+      state: present
+    become_user: postgres
+    become: true
 
-- name: Ensure user {{ postgres_user }} exists
-  postgresql_user:
-    db: '{{ app_name }}_{{ app_env }}'
-    name: '{{ postgres_user }}'
-    password: '{{ postgres_user_password }}'
-    priv: "ALL"
-    state: present
-    encrypted: true
-  become_user: postgres
-  become: true
-  notify:
-    - restart postgres
+  - name: Ensure user {{ item.db_user }} exists
+    postgresql_user:
+      db: '{{ item.db_name }}'
+      name: '{{ item.db_user }}'
+      password: '{{ item.db_password }}'
+      priv: "ALL"
+      state: present
+      encrypted: true
+    become_user: postgres
+    become: true
+    notify:
+      - restart postgres
+  with_items:
+    - '{{ databases }}'
