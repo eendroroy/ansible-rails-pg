@@ -17,7 +17,7 @@
     raw: yum -y update
     become: true
 
-  - name: Upgrade packages
+  - name: Upgrade yum packages
     raw: yum -y upgrade
     become: true
 
@@ -36,12 +36,12 @@
     raw: apt-get -y upgrade
     become: true
 
-  - name: Upgrade apt packages
+  - name: Install ansible dependency
     raw: apt-get install -y python-simplejson
     become: true
 
   - name: Cleanup apt
-    raw: apt-get -y autoremove && apt-get -y autoclean
+    raw: apt-get -y autoremove && apt-get -y clean
     become: true
 
   when: release.stdout == 'ubuntu'
