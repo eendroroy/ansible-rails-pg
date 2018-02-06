@@ -1,6 +1,7 @@
 ---
 - name: Initial setup
   hosts: all
+  strategy: free
   gather_facts: no
 
   roles:
@@ -8,6 +9,7 @@
 
 - name: Configure Web server
   hosts: web
+  strategy: free
 
   roles:
     - rails-config
@@ -16,6 +18,7 @@
 
 - name: Configure DB server
   hosts: db
+  strategy: free
 
   roles:
     - postgres
