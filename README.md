@@ -30,12 +30,14 @@ A sample Vagrantfile is included to test the playbook (Ubuntu 16.04 and CentOS 7
 ## Variables
 
 ```bash
-ruby_version:           2.5.0
-deploy_user:            deployer
-app_name:               application
-app_env:                vagrant
-postgres_user:          VagrantUser
-postgres_user_password: vagrant_pass
+ruby_version: 2.5.0
+deploy_user:  deployer
+app_name:     application
+deploy_path:  '/apps'
+app_env:      staging
+databases:
+  - { db_name: '{{ app_name }}_production', db_user: 'production_user', db_password: 'production_pass' }
+  - { db_name: '{{ app_name }}_staging',    db_user: 'staging_user',    db_password: 'staging_pass' }
 ```
 
 ## Contributing
