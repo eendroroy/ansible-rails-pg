@@ -1,6 +1,8 @@
 ---
 - name: Test ansible variables
-  hosts: staging
+  hosts:
+    - web
+    - db
 
   roles:
     - test
