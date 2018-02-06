@@ -3,7 +3,7 @@
   raw: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
   become: true
 
-- name: Install nodejs APT
+- name: Install nodejs {{ ansible_os_family }}
   apt:
     name: nodejs
     state: installed
