@@ -29,6 +29,22 @@
 - import_tasks: apt/update_config.yml
   when: ansible_os_family == 'Debian'
 
+- name: start postgres
+  service:
+    name: postgresql-10
+    state: started
+    enabled: yes
+  become: true
+  when: ansible_os_family == 'RedHat'
+
+- name: start postgres
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: true
+  when: ansible_os_family == 'Debian'
+
 - include_tasks: create_db.yml
   notify:
     - restart postgres
