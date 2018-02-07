@@ -8,3 +8,4 @@
   with_items:
     - gcc-c++
     - ImageMagick
+    - postgresql-devel
