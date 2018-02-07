@@ -38,6 +38,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define 'centos7-db' do |centos7|
     centos7.vm.box = "centos/7"
-    centos7.vm.network "private_network", ip: "192.168.33.17"  
+    centos7.vm.network "private_network", ip: "192.168.33.17"
   end
 end
