@@ -28,6 +28,29 @@
   when: release.stdout == 'centos'
 
 - block:
+  - name: Enable EPEL
+    raw: '{{ item }}'
+    become: true
+    with_items:
+      - 'rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+      - 'yum-config-manager --enable epel'
+    ignore_errors: yes
+
+  - name: Update yum cache
+    raw: yum -y update
+    become: true
+
+  - name: Upgrade yum packages
+    raw: yum -y upgrade
+    become: true
+
+  - name: Cleanup yum
+    raw: yum -y clean packages
+    become: true
+
+  when: release.stdout == 'rhel'
+
+- block:
   - name: Update apt cache
     raw: apt-get -y update
     become: true
