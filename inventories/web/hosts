@@ -4,5 +4,6 @@ xenial-web  ansible_host=192.168.33.12
 centos7-web ansible_host=192.168.33.13
 
 [web:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_ssh_user=vagrant
 ansible_ssh_private_key_file=.vagrant/machines/{{ inventory_hostname }}/virtualbox/private_key

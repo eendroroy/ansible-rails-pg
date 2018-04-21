@@ -4,5 +4,6 @@ xenial-db  ansible_host=192.168.33.16
 centos7-db ansible_host=192.168.33.17
 
 [db:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_ssh_user=vagrant
 ansible_ssh_private_key_file=.vagrant/machines/{{ inventory_hostname }}/virtualbox/private_key
