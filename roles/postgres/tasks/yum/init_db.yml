@@ -1,5 +1,5 @@
 ---
-- name: Check if postgres data-dir is initialized {{ ansible_os_family }}
+- name: Check if postgres data-dir ({{ postgres_data_dir }}) is initialized {{ ansible_os_family }}
   find: 
     paths: "{{ postgres_data_dir }}"
     file_type: directory
