@@ -13,32 +13,10 @@
 
 - import_tasks: initialize.yml
 
-- import_tasks: yum/start_service.yml
+- import_tasks:  yum/start_service.yml
   when: ansible_os_family == 'RedHat'
 
 - import_tasks: apt/start_service.yml
-  when: ansible_os_family == 'Debian'
-
-- import_tasks: yum/update_config.yml
-  when: ansible_os_family == 'RedHat'
-
-- import_tasks: apt/update_config.yml
-  when: ansible_os_family == 'Debian'
-
-- name: start postgres
-  service:
-    name: postgresql-10
-    state: started
-    enabled: yes
-  become: true
-  when: ansible_os_family == 'RedHat'
-
-- name: start postgres
-  service:
-    name: postgresql
-    state: started
-    enabled: yes
-  become: true
   when: ansible_os_family == 'Debian'
 
 - include_tasks: create_db.yml

@@ -2,7 +2,7 @@
 - name: Install postgresql 10 {{ ansible_os_family }}
   apt:
     name: '{{ item }}'
-    state: installed
+    state: present
     update_cache: true
   become: true
   with_items:

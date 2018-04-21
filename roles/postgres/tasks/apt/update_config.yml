@@ -2,11 +2,11 @@
 - name: Update pg_hba config {{ ansible_os_family }}
   template:
     src: pg_hba.conf.j2
-    dest: /etc/postgresql/10/main/pg_hba.conf
+    dest: "{{ postgres_data_dir }}/pg_hba.conf"
   become: true
 
 - name: Update postgres config {{ ansible_os_family }}
   template:
     src: postgresql.conf.j2
-    dest: /etc/postgresql/10/main/postgresql.conf
+    dest: "{{ postgres_data_dir }}/postgresql.conf"
   become: true

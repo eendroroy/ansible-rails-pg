@@ -1,4 +1,10 @@
 ---
+- import_tasks: yum/update_config.yml
+  when: ansible_os_family == 'RedHat'
+
+- import_tasks: apt/update_config.yml
+  when: ansible_os_family == 'Debian'
+
 - import_tasks: apt/init_db.yml
   when: ansible_os_family == 'Debian'
 
