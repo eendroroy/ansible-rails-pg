@@ -9,4 +9,5 @@
     - postgresql10-server
     - postgresql10-libs
     - postgresql10-devel
+    - postgresql10-contrib
     - python-psycopg2
