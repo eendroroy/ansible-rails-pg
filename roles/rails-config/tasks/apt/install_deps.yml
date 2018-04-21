@@ -2,7 +2,7 @@
 - name: Install dependencies {{ ansible_os_family }}
   apt:
     name: '{{ item }}'
-    state: installed
+    state: present
     update_cache: yes
   become: true
   with_items:

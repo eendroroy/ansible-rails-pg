@@ -6,6 +6,6 @@
 - name: Install nodejs {{ ansible_os_family }}
   apt:
     name: nodejs
-    state: installed
+    state: present
     update_cache: yes
   become: true
