@@ -40,9 +40,9 @@
 
 data_directory = '{{ postgres_data_dir }}'		# use data in another directory
 					# (change requires restart)
-#hba_file = 'ConfigDir/pg_hba.conf'	# host-based authentication file
+hba_file = '{{ postgres_data_dir }}/pg_hba.conf'	# host-based authentication file
 					# (change requires restart)
-#ident_file = 'ConfigDir/pg_ident.conf'	# ident configuration file
+ident_file = '{{ postgres_data_dir }}/pg_ident.conf'	# ident configuration file
 					# (change requires restart)
 
 # If external_pid_file is not explicitly set, no extra PID file is written.
