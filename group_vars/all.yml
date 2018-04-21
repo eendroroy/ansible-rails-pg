@@ -4,6 +4,8 @@ deploy_user: deployer
 app_name: application
 deploy_path: '/apps'
 app_env: staging
+
+postgres_data_dir: /var/lib/postgres/databases
 databases:
   - { db_name: '{{ app_name }}_production', db_user: 'production_user', db_password: 'production_pass' }
   - { db_name: '{{ app_name }}_staging',    db_user: 'staging_user',    db_password: 'staging_pass' }
