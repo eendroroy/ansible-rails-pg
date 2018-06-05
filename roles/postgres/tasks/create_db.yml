@@ -7,6 +7,9 @@
     encrypted: true
     login_user: postgres
   become: true
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
 
 - name: Ensure database {{ item.db_name }} exists
   postgresql_db:
@@ -17,3 +20,6 @@
     template: template0
     login_user: postgres
   become: true
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
