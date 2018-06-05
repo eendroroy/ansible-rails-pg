@@ -20,4 +20,4 @@
     - '{{ postgres_data_dir }}/postgresql.conf'
     - /etc/postgresql/10/main/postgresql.conf
   become: true
-  notify: restart postgres
+  notify: restart postgres debian
