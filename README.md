@@ -25,7 +25,7 @@ Tested on `Ubuntu 14.04`, `Ubuntu 16.04`, `CentOS 7`, and `RedHat 7`
 - Some common dependencies required for rails applications
 - Create deploy user with ssh access and specific sudo permission required to deploy rails application
 
-A sample Vagrantfile is included to test the playbook (Ubuntu 16.04 and CentOS 7)
+A sample Vagrantfile is included to test the playbook (Ubuntu 14.04, Ubuntu 16.04 and CentOS 7)
 
 ## Variables
 
