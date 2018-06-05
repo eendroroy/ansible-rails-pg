@@ -56,11 +56,11 @@ ident_file = '{{ postgres_data_dir }}/pg_ident.conf'	# ident configuration file
 
 # - Connection Settings -
 
-listen_addresses = '*'			# what IP address(es) to listen on;
+listen_addresses = '{{ postgres_listen_address }}'			# what IP address(es) to listen on;
 					# comma-separated list of addresses;
 					# defaults to 'localhost'; use '*' for all
 					# (change requires restart)
-#port = 5432				# (change requires restart)
+port = {{ postgres_port }}				# (change requires restart)
 max_connections = 100			# (change requires restart)
 #superuser_reserved_connections = 3	# (change requires restart)
 #unix_socket_directories = '/var/run/postgresql, /tmp'	# comma-separated list of directories

@@ -3,6 +3,8 @@
   template:
     src: pg_hba.conf.j2
     dest: '{{ item }}'
+    group: postgres
+    owner: postgres
   with_items:
     - '{{ postgres_data_dir }}/pg_hba.conf'
     - /var/lib/pgsql/10/data/pg_hba.conf
@@ -12,6 +14,8 @@
   template:
     src: postgresql.conf.j2
     dest: '{{ item }}'
+    group: postgres
+    owner: postgres
   with_items:
     - '{{ postgres_data_dir }}/postgresql.conf'
     - /var/lib/pgsql/10/data/postgresql.conf
