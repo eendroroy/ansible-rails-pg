@@ -30,7 +30,7 @@ A sample Vagrantfile is included to test the playbook (Ubuntu 16.04 and CentOS 7
 ## Variables
 
 ```bash
-# group_vars/main.yml
+# group_vars/all.yml
 ruby_version: 2.5.0
 deploy_user:  deployer
 app_name:     application
@@ -45,6 +45,8 @@ postgres_data_dir:       /var/lib/postgres/databases
 postgres_listen_address: '*'
 postgres_port:           5432
 ```
+
+See here: [group_vars/all.yml](group_vars/all.yml)
 
 ## Contributing
 
