@@ -29,9 +29,9 @@ A sample Vagrantfile is included to test the playbook (Ubuntu 14.04, Ubuntu 16.0
 
 ## Variables
 
-```bash
+```yaml
 # group_vars/all.yml
-ruby_version: 2.5.0
+ruby_version: 2.6.0
 deploy_user:  deployer
 app_name:     application
 deploy_path:  '/apps'
@@ -41,9 +41,26 @@ databases:
   - { db_name: '{{ app_name }}_production', db_user: 'production_user', db_password: 'production_pass' }
   - { db_name: '{{ app_name }}_staging',    db_user: 'staging_user',    db_password: 'staging_pass' }
 
-postgres_data_dir:       /var/lib/postgres/databases
+postgres_data_dir:       /data/postgres
 postgres_listen_address: '*'
 postgres_port:           5432
+
+## Tune: mem_24_cpu_16_con_600_store_ssd
+postgres_max_connections:                 600
+postgres_shared_buffers:                  6GB
+postgres_effective_cache_size:            18GB
+postgres_maintenance_work_mem:            1536MB
+postgres_checkpoint_completion_target:    0.7
+postgres_wal_buffers:                     16MB
+postgres_default_statistics_target:       100
+postgres_random_page_cost:                1.1
+postgres_effective_io_concurrency:        200
+postgres_work_mem:                        1310kB
+postgres_min_wal_size:                    1GB
+postgres_max_wal_size:                    2GB
+postgres_max_worker_processes:            16
+postgres_max_parallel_workers_per_gather: 8
+postgres_max_parallel_workers:            16
 ```
 
 See here: [group_vars/all.yml](group_vars/all.yml)
@@ -53,6 +70,12 @@ See here: [group_vars/all.yml](group_vars/all.yml)
 Bug reports and pull requests are welcome on GitHub at [ansible-rails-pg repository](https://github.com/eendroroy/ansible-rails-pg). 
 This project is intended to be a safe, welcoming space for collaboration,
 and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+  1. Fork it [eendroroy/ansible-rails-pg](https://github.com/eendroroy/ansible-rails-pg/fork)
+  1. Create your feature branch (`git checkout -b my-new-feature`)
+  1. Commit your changes (`git commit -am 'Add some feature'`)
+  1. Push to the branch (`git push origin my-new-feature`)
+  1. Create a new Pull Request
 
 ## Authors
 
