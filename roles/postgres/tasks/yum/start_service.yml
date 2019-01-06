@@ -1,7 +1,7 @@
 ---
 - name: Start postgres {{ ansible_os_family }}
   service:
-    name: postgresql-10
+    name: postgresql-11
     state: started
     enabled: yes
   become: true

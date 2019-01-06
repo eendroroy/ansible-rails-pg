@@ -2,16 +2,22 @@
 - name: Update pg_hba config {{ ansible_os_family }}
   template:
     src: pg_hba.conf.j2
-    dest: '{{ postgres_data_dir }}/pg_hba.conf'
+    dest: '{{ item }}'
     group: postgres
     owner: postgres
   become: true
+  with_items:
+    - /etc/postgresql/10/main/pg_hba.conf
+    - '{{ postgres_data_dir }}/pg_hba.conf'
 
 - name: Update postgres config {{ ansible_os_family }}
   template:
     src: postgresql.conf.j2
-    dest: /etc/postgresql/10/main/postgresql.conf
+    dest: '{{ item }}'
     group: postgres
     owner: postgres
   become: true
+  with_items:
+    - /etc/postgresql/10/main/postgresql.conf
+    - '{{ postgres_data_dir }}/postgresql.conf'
   notify: restart postgres debian
