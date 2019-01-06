@@ -1,7 +1,5 @@
 [db]
-trusty-db  ansible_host=192.168.33.15
-xenial-db  ansible_host=192.168.33.16
-centos7-db ansible_host=192.168.33.17
+centos7-db ansible_host=192.168.33.11
 
 [db:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
