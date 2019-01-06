@@ -1,12 +1,8 @@
 ---
-- import_tasks: yum/add_nginx_repo.yml
+- include_tasks: RedHat/add_nginx_repo.yml
   when: ansible_os_family == 'RedHat'
 
-- import_tasks: apt/install_nginx.yml
-  when: ansible_os_family == 'Debian'
-
-- import_tasks: yum/install_nginx.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: '{{ ansible_os_family }}/install_nginx.yml'
 
 - name: Ensure configuration directorie exists
   file:
