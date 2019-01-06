@@ -1,4 +1,4 @@
 ---
 - name : Enable postgres service {{ ansible_os_family }}
-  raw: systemctl enable postgresql-10.service
+  raw: systemctl enable postgresql-11.service
   become: true

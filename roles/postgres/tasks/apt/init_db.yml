@@ -18,7 +18,7 @@
   when: psql_data.matched|int == 0
 
 - name: Initialize postgres data-dir
-  raw: /usr/lib/postgresql/10/bin/pg_ctl initdb --pgdata={{ postgres_data_dir }}
+  raw: /usr/lib/postgresql/11/bin/pg_ctl initdb --pgdata={{ postgres_data_dir }}
   become: true
   become_user: postgres
   ignore_errors: true

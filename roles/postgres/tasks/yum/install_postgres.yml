@@ -1,11 +1,11 @@
 ---
-- name: Install postgresql 10 {{ ansible_os_family }}
+- name: Install postgresql 11 {{ ansible_os_family }}
   yum:
     name:
-      - postgresql10-server
-      - postgresql10-libs
-      - postgresql10-devel
-      - postgresql10-contrib
+      - postgresql11-server
+      - postgresql11-libs
+      - postgresql11-devel
+      - postgresql11-contrib
       - python-psycopg2
     state: present
     update_cache: true

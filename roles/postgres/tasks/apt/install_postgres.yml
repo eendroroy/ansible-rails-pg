@@ -1,5 +1,5 @@
 ---
-- name: Install postgresql 10 {{ ansible_os_family }}
+- name: Install postgresql {{ ansible_os_family }}
   apt:
     name:
       - postgresql
