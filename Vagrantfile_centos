@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box_check_update = false
+
+  config.vm.define 'centos7-web' do |centos7|
+    centos7.vm.box = "centos/7"
+    centos7.vm.network "private_network", ip: "192.168.33.10"
+  end
+
+  config.vm.define 'centos7-db' do |centos7|
+    centos7.vm.box = "centos/7"
+    centos7.vm.network "private_network", ip: "192.168.33.11"
+  end
+end
