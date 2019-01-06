@@ -1,23 +1,11 @@
 ---
-- import_tasks: yum/add_repo.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: '{{ ansible_os_family }}/add_repo.yml'
 
-- import_tasks: apt/add_repo.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: '{{ ansible_os_family }}/install_postgres.yml'
 
-- import_tasks: yum/install_postgres.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: initialize.yml
 
-- import_tasks: apt/install_postgres.yml
-  when: ansible_os_family == 'Debian'
-
-- import_tasks: initialize.yml
-
-- import_tasks:  yum/start_service.yml
-  when: ansible_os_family == 'RedHat'
-
-- import_tasks: apt/start_service.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks:  '{{ ansible_os_family }}/start_service.yml'
 
 - include_tasks: create_db.yml
   notify:
