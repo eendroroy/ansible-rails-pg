@@ -1,5 +1,5 @@
 ---
-- name: Initial setup
+- name: Initial provisioning
   hosts: all
   strategy: free
   gather_facts: no
@@ -7,18 +7,18 @@
   roles:
     - setup
 
-- name: Configure Web server
+- name: Provision Web server
   hosts: web
   strategy: free
 
   roles:
-    - rails-config
+    - rails
     - nginx
     - rbenv
 
-- name: Configure DB server
+- name: Provision DB server
   hosts: db
   strategy: free
 
   roles:
-    - postgres
+    - postgresql
