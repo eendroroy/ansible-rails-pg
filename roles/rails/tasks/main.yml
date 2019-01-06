@@ -39,14 +39,6 @@
     owner: '{{ deploy_user }}'
   become: true
 
-- import_tasks: yum/install_node.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: '{{ ansible_os_family }}/install_node.yml'
 
-- import_tasks: apt/install_node.yml
-  when: ansible_os_family == 'Debian'
-
-- import_tasks: yum/install_deps.yml
-  when: ansible_os_family == 'RedHat'
-
-- import_tasks: apt/install_deps.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: '{{ ansible_os_family }}/install_deps.yml'
