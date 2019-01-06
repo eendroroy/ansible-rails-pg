@@ -1,21 +1,17 @@
 ---
-- import_tasks: yum/install-deps.yml
-  when: ansible_os_family == 'RedHat'
-
-- import_tasks: apt/install-deps.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: '{{ ansible_os_family }}/install-deps.yml'
 
 - name: Install rbenv
-  import_tasks: install-rbenv.yml
+  include_tasks: install-rbenv.yml
 
-- name: Install ruby-build
-  import_tasks: plugins/ruby-build.yml
-
-- name: Install rbenv-default-gems
-  import_tasks: plugins/rbenv-default-gems.yml
+- name: Install pluginns
+  include_tasks: plugins/{{ item }}.yml
+  with_items:
+    - ruby-build
+    - rbenv-default-gems
 
 - name: Install ruby
-  import_tasks: install-ruby.yml
+  include_tasks: install-ruby.yml
 
 - name: Make sure bundler is installed
   raw: 'RBENV_ROOT={{ rbenv_path }} RBENV_VERSION={{ ruby_version }} {{ rbenv_path }}/bin/rbenv exec gem install bundler'

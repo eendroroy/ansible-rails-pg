@@ -1,0 +1,17 @@
+---
+- name: Install dependencies {{ ansible_os_family }}
+  yum:
+    name:
+      - git
+      - gcc
+      - bzip2
+      - openssl-devel
+      - libyaml-devel
+      - libffi-devel
+      - readline-devel
+      - zlib-devel
+      - gdbm-devel
+      - ncurses-devel
+    state: present
+    update_cache: yes
+  become: true
