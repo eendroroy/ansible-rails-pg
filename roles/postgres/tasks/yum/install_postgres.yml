@@ -1,13 +1,12 @@
 ---
 - name: Install postgresql 10 {{ ansible_os_family }}
   yum:
-    name: '{{ item }}'
+    name:
+      - postgresql10-server
+      - postgresql10-libs
+      - postgresql10-devel
+      - postgresql10-contrib
+      - python-psycopg2
     state: present
     update_cache: true
   become: true
-  with_items:
-    - postgresql10-server
-    - postgresql10-libs
-    - postgresql10-devel
-    - postgresql10-contrib
-    - python-psycopg2

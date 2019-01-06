@@ -1,5 +1,5 @@
 ---
-- name: Download postgresql repository {{ ansible_os_family }}
+- name: Install postgresql repository {{ ansible_os_family }}
   raw: sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
 
 - name: Import postgresql key APT

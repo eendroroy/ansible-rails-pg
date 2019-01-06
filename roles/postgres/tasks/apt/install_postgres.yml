@@ -1,11 +1,10 @@
 ---
 - name: Install postgresql 10 {{ ansible_os_family }}
   apt:
-    name: '{{ item }}'
+    name:
+      - postgresql
+      - postgresql-contrib
+      - python-psycopg2
     state: present
     update_cache: true
   become: true
-  with_items:
-    - postgresql
-    - postgresql-contrib
-    - python-psycopg2

@@ -2,26 +2,15 @@
 - name: Update pg_hba config {{ ansible_os_family }}
   template:
     src: pg_hba.conf.j2
-    dest: '{{ item }}'
+    dest: '{{ postgres_data_dir }}/pg_hba.conf'
     group: postgres
     owner: postgres
-  with_items:
-    - '{{ postgres_data_dir }}/pg_hba.conf'
-    - /var/lib/pgsql/10/data/pg_hba.conf
   become: true
 
 - name: Update postgres config {{ ansible_os_family }}
   template:
     src: postgresql.conf.j2
-    dest: '{{ item }}'
+    dest: /var/lib/pgsql/10/data/postgresql.conf
     group: postgres
     owner: postgres
-  with_items:
-    - '{{ postgres_data_dir }}/postgresql.conf'
-    - /var/lib/pgsql/10/data/postgresql.conf
   become: true
-
-- name: Update postgres service
-  raw: sed 's|/var/lib/pgsql/10/data/|/var/lib/postgres/databases/|g' -i /usr/lib/systemd/system/postgresql-10.service && systemctl daemon-reload
-  become: true
-  notify: restart postgres rhel
