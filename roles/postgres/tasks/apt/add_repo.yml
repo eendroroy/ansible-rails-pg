@@ -1,6 +1,6 @@
 ---
-- name: Download postgresql 10 repository {{ ansible_os_family }}
+- name: Download postgresql repository {{ ansible_os_family }}
   raw: sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
 
-- name: Import posgres 10 key APT
+- name: Import postgresql key APT
   raw: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
