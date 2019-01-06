@@ -1,7 +1,7 @@
 ---
 - name: restart postgres rhel
   service:
-    name: postgresql-10
+    name: postgresql-11
     state: restarted
     enabled: yes
   become: true
@@ -9,7 +9,7 @@
 
 - name: start postgres rhel
   service:
-    name: postgresql-10
+    name: postgresql-11
     state: started
     enabled: yes
   become: true
