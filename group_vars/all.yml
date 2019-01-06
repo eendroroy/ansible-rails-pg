@@ -9,9 +9,9 @@ databases:
   - { db_name: '{{ app_name }}_production',  db_user: 'production_user',  db_password: 'production_pass' }
   - { db_name: '{{ app_name }}_staging',     db_user: 'staging_user',     db_password: 'staging_pass' }
   - { db_name: '{{ app_name }}_development', db_user: 'development_user', db_password: 'development_pass' }
-  - { db_name: '{{ app_name }}_test',        db_user: 'development_user', db_password: 'development_pass' }
+  - { db_name: '{{ app_name }}_test',        db_user: 'test_user',        db_password: 'test_pass' }
 
-postgres_data_dir: /data/postgres
+postgres_data_dir: /data/postgres/databases
 postgres_listen_address: '*'
 postgres_port: 5432
 
@@ -50,18 +50,35 @@ postgres_port: 5432
 #postgres_max_parallel_workers: 4
 
 ## Tune: mem_4_cpu_2_con_50_store_ssd ________________
+#postgres_max_connections: 50
+#postgres_shared_buffers: 1GB
+#postgres_effective_cache_size: 3GB
+#postgres_maintenance_work_mem: 256MB
+#postgres_checkpoint_completion_target: 0.7
+#postgres_wal_buffers: 16MB
+#postgres_default_statistics_target: 100
+#postgres_random_page_cost: 1.1
+#postgres_effective_io_concurrency: 200
+#postgres_work_mem: 20971kB
+#postgres_min_wal_size: 1GB
+#postgres_max_wal_size: 2GB
+#postgres_max_worker_processes: 2
+#postgres_max_parallel_workers_per_gather: 1
+#postgres_max_parallel_workers: 2
+
+## Tune: mem_1_cpu_2_con_50_store_ssd ________________
 postgres_max_connections: 50
-postgres_shared_buffers: 1GB
-postgres_effective_cache_size: 3GB
-postgres_maintenance_work_mem: 256MB
+postgres_shared_buffers: 256MB
+postgres_effective_cache_size: 768MB
+postgres_maintenance_work_mem: 64MB
 postgres_checkpoint_completion_target: 0.7
-postgres_wal_buffers: 16MB
+postgres_wal_buffers: 7864kB
 postgres_default_statistics_target: 100
 postgres_random_page_cost: 1.1
 postgres_effective_io_concurrency: 200
-postgres_work_mem: 20971kB
-postgres_min_wal_size: 1GB
-postgres_max_wal_size: 2GB
+postgres_work_mem: 5242kB
+postgres_min_wal_size: 256MB
+postgres_max_wal_size: 512MB
 postgres_max_worker_processes: 2
 postgres_max_parallel_workers_per_gather: 1
 postgres_max_parallel_workers: 2
