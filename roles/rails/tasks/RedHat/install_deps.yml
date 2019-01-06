@@ -1,11 +1,10 @@
 ---
 - name: Install dependencies {{ ansible_os_family }}
   yum:
-    name: '{{ item }}'
-    state: installed
+    name:
+      - gcc-c++
+      - ImageMagick
+      - postgresql-devel
+    state: present
     update_cache: yes
   become: true
-  with_items:
-    - gcc-c++
-    - ImageMagick
-    - postgresql-devel

@@ -1,11 +1,10 @@
 ---
 - name: Install dependencies {{ ansible_os_family }}
   apt:
-    name: '{{ item }}'
+    name:
+      - g++
+      - imagemagick
+      - libpq-dev
     state: present
     update_cache: yes
   become: true
-  with_items:
-    - g++
-    - imagemagick
-    - libpq-dev

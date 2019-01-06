@@ -1,16 +1,11 @@
 ---
 - name: Add nodejs ppa {{ ansible_os_family }}
-  get_url: 
-    url: https://rpm.nodesource.com/setup_8.x
-    dest: /tmp/nodejs.sh
-
-- name: Execute nodejs ppa installer
-  command: sh /tmp/nodejs.sh
+  raw: curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
   become: true
 
 - name: Install nodejs {{ ansible_os_family }}
   yum:
     name: nodejs
-    state: installed
+    state: present
     update_cache: yes
   become: true
