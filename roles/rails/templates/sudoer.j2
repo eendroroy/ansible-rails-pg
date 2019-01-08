@@ -13,3 +13,4 @@
 {{ deploy_user }} ALL=NOPASSWD:/usr/sbin/service nginx *
 {{ deploy_user }} ALL=NOPASSWD:/etc/init.d/puma_{{ app_name }}_{{ app_env }} *
 {{ deploy_user }} ALL=NOPASSWD:/usr/sbin/service puma_{{ app_name }}_{{ app_env }} *
+{{ deploy_user }} ALL=NOPASSWD:/bin/chown root\:root /etc/logrotate.d/{{ app_name }}_{{ app_env }}

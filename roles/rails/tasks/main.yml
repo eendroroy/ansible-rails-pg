@@ -5,7 +5,7 @@
     comment: "Application deployment user"
   become: true
 
-- name: Update user permissions
+- name: Update user permissions at /etc/sudoers.d/{{ deploy_user }}
   template:
     src: templates/sudoer.j2
     dest: /etc/sudoers.d/{{ deploy_user }}
